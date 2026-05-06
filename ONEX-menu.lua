@@ -71,7 +71,7 @@ end
 
 Menu.Banner = {
     enabled = true,
-    imageUrl = "https://imgur.com/a/d78WzrM",
+    imageUrl = "https://i.imgur.com/3n9wVhm.png",
     height = 100
 }
 
@@ -3010,3 +3010,6 @@ end
 if Menu.Banner.enabled and Menu.Banner.imageUrl then
     Menu.LoadBannerTexture(Menu.Banner.imageUrl)
 end
+
+
+return Menu
