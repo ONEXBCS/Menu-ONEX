@@ -167,10 +167,6 @@ function Menu.ApplyTheme(themeName)
         Menu.CurrentTheme = "Purple"
     end
 
-    Menu.CurrentTheme = "Purple"
-    Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
-    Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
-    Menu.Banner.imageUrl = "https://imgur.com/a/d78WzrM"
     if Menu.Banner.enabled and Menu.Banner.imageUrl then
         Menu.LoadBannerTexture(Menu.Banner.imageUrl)
     end
@@ -264,7 +260,7 @@ function Menu.DrawHeader()
 
     if Menu.Banner.enabled then
         if Menu.bannerTexture and Menu.bannerTexture > 0 and Susano and Susano.DrawImage then
-            -- Dessiner la banniÃ¨re sans coins arrondis
+            -- Dessiner la bannière sans coins arrondis
             Susano.DrawImage(Menu.bannerTexture, x, y, width, bannerHeight, 1, 1, 1, 1, 0)
         else
             Menu.DrawRect(x, y, width, height, Menu.Colors.HeaderPink.r, Menu.Colors.HeaderPink.g, Menu.Colors.HeaderPink.b, 255)
@@ -307,15 +303,15 @@ function Menu.DrawScrollbar(x, startY, visibleHeight, selectedIndex, totalItems,
         adjustedIndex = selectedIndex - 1
     end
 
-    -- Le thumb garde toujours la taille des options visibles et se dÃ©place seulement
+    -- Le thumb garde toujours la taille des options visibles et se déplace seulement
     local thumbHeight = scrollbarHeight  -- Toujours la hauteur des options visibles
     local thumbY
     
     if totalItems <= Menu.ItemsPerPage then
-        -- Tous les Ã©lÃ©ments sont visibles : le thumb reste en haut
+        -- Tous les éléments sont visibles : le thumb reste en haut
         thumbY = scrollbarY
     else
-        -- Calcul de la position du thumb basÃ©e sur le scroll offset
+        -- Calcul de la position du thumb basée sur le scroll offset
         local scrollOffset = 0
         if not isMainMenu and Menu.ItemScrollOffset then
             scrollOffset = Menu.ItemScrollOffset
@@ -327,7 +323,7 @@ function Menu.DrawScrollbar(x, startY, visibleHeight, selectedIndex, totalItems,
         local scrollProgress = scrollOffset / math.max(1, totalScrollable)
         scrollProgress = math.min(1.0, math.max(0.0, scrollProgress))
         
-        -- Le thumb se dÃ©place mais garde sa taille fixe
+        -- Le thumb se déplace mais garde sa taille fixe
         local maxThumbY = scrollbarY + scrollbarHeight - thumbHeight
         thumbY = scrollbarY + scrollProgress * (scrollbarHeight - thumbHeight)
         thumbY = math.max(scrollbarY, math.min(maxThumbY, thumbY))
@@ -594,7 +590,7 @@ function Menu.DrawItem(x, itemY, width, itemHeight, item, isSelected)
                     local stepG = math.max(0, baseG - stepDarken)
                     local stepB = math.max(0, baseB - stepDarken)
                     
-                    -- Ajout d'un lÃ©ger effet de brillance au dÃ©but
+                    -- Ajout d'un léger effet de brillance au début
                     local brightness = 1.0
                     if step < gradientSteps * 0.1 then
                         brightness = 1.0 + (0.15 * (1.0 - step / (gradientSteps * 0.1)))
@@ -625,16 +621,16 @@ function Menu.DrawItem(x, itemY, width, itemHeight, item, isSelected)
                 local actualStepHeight = math.min(stepHeight, (drawY + itemHeight) - stepY)
                 if actualStepHeight > 0 then
                     local stepGradientFactor = step / (gradientSteps - 1)
-                    -- Courbe d'easing amÃ©liorÃ©e
+                    -- Courbe d'easing améliorée
                     local easedFactor = stepGradientFactor * stepGradientFactor * (3.0 - 2.0 * stepGradientFactor)
-                    -- RÃ©duction de l'assombrissement pour que le bas soit moins noir
+                    -- Réduction de l'assombrissement pour que le bas soit moins noir
                     local stepDarken = easedFactor * darkenAmount * 1.0
 
                     local stepR = math.max(0, baseR - stepDarken)
                     local stepG = math.max(0, baseG - stepDarken)
                     local stepB = math.max(0, baseB - stepDarken)
                     
-                    -- Effet de brillance au dÃ©but
+                    -- Effet de brillance au début
                     local brightness = 1.0
                     if step < gradientSteps * 0.15 then
                         brightness = 1.0 + (0.12 * (1.0 - step / (gradientSteps * 0.15)))
@@ -702,7 +698,7 @@ function Menu.DrawItem(x, itemY, width, itemHeight, item, isSelected)
             circleX = toggleX + 2
         end
 
-        local isGrayTheme = false
+        local isGrayTheme = (Menu.CurrentTheme == "Gray")
         local circleR, circleG, circleB
         if isGrayTheme then
             circleR = 1.0
@@ -822,7 +818,7 @@ function Menu.DrawItem(x, itemY, width, itemHeight, item, isSelected)
             circleX = toggleX + 2
         end
 
-        local isGrayTheme = false
+        local isGrayTheme = (Menu.CurrentTheme == "Gray")
         local circleR, circleG, circleB
         if isGrayTheme then
             circleR = 1.0
@@ -1072,7 +1068,7 @@ function Menu.DrawCategories()
 
     local itemY = startY
     
-    -- DÃ©gradÃ© pour la barre Main Menu (mÃªme style que les tabs)
+    -- Dégradé pour la barre Main Menu (même style que les tabs)
     local baseR = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.r) and (Menu.Colors.HeaderPink.r / 255.0) or 0.58
     local baseG = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.g) and (Menu.Colors.HeaderPink.g / 255.0) or 0.0
     local baseB = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.b) and (Menu.Colors.HeaderPink.b / 255.0) or 0.83
@@ -1090,11 +1086,11 @@ function Menu.DrawCategories()
         end
         
         local stepGradientFactor = step / (gradientSteps - 1)
-        -- Courbe d'easing amÃ©liorÃ©e pour un gradient plus fluide
+        -- Courbe d'easing améliorée pour un gradient plus fluide
         local easedFactor = stepGradientFactor * stepGradientFactor * (3.0 - 2.0 * stepGradientFactor)
         local alpha = 0.5 + (easedFactor * 0.5)
         
-        -- Effet de brillance au dÃ©but
+        -- Effet de brillance au début
         local brightness = 1.0
         if step < gradientSteps * 0.3 then
             brightness = 1.0 + (0.2 * (1.0 - step / (gradientSteps * 0.3)))
@@ -1151,11 +1147,11 @@ function Menu.DrawCategories()
                     end
                     
                     local stepGradientFactor = step / (gradientSteps - 1)
-                    -- Courbe d'easing amÃ©liorÃ©e pour un gradient plus fluide
+                    -- Courbe d'easing améliorée pour un gradient plus fluide
                     local easedFactor = stepGradientFactor * stepGradientFactor * (3.0 - 2.0 * stepGradientFactor)
                     local alpha = easedFactor * 0.65
                     
-                    -- Effet de brillance au dÃ©but
+                    -- Effet de brillance au début
                     local brightness = 1.0
                     if step < gradientSteps * 0.2 then
                         brightness = 1.0 + (0.1 * (1.0 - step / (gradientSteps * 0.2)))
@@ -1171,7 +1167,7 @@ function Menu.DrawCategories()
                     end
                 end
                 
-                -- Ligne de sÃ©paration amÃ©liorÃ©e avec un lÃ©ger glow
+                -- Ligne de séparation améliorée avec un léger glow
                 if Susano and Susano.DrawRectFilled then
                     Susano.DrawRectFilled(drawX, itemY + mainMenuHeight - 3, drawWidth, 1, baseR * 0.5, baseG * 0.5, baseB * 0.5, 0.6, 0)
                     Susano.DrawRectFilled(drawX, itemY + mainMenuHeight - 2, drawWidth, 2, baseR, baseG, baseB, 1.0, 0)
@@ -1262,7 +1258,7 @@ function Menu.DrawCategories()
                             local stepG = math.max(0, baseG - stepDarken)
                             local stepB = math.max(0, baseB - stepDarken)
                             
-                            -- Ajout d'un lÃ©ger effet de brillance au dÃ©but
+                            -- Ajout d'un léger effet de brillance au début
                             local brightness = 1.0
                             if step < gradientSteps * 0.1 then
                                 brightness = 1.0 + (0.15 * (1.0 - step / (gradientSteps * 0.1)))
@@ -1293,16 +1289,16 @@ function Menu.DrawCategories()
                         local actualStepHeight = math.min(stepHeight, (drawY + itemHeight) - stepY)
                         if actualStepHeight > 0 then
                             local stepGradientFactor = step / (gradientSteps - 1)
-                            -- Courbe d'easing amÃ©liorÃ©e
+                            -- Courbe d'easing améliorée
                             local easedFactor = stepGradientFactor * stepGradientFactor * (3.0 - 2.0 * stepGradientFactor)
-                            -- RÃ©duction de l'assombrissement pour que le bas soit moins noir
+                            -- Réduction de l'assombrissement pour que le bas soit moins noir
                             local stepDarken = easedFactor * darkenAmount * 0.8
 
                             local stepR = math.max(0, baseR - stepDarken)
                             local stepG = math.max(0, baseG - stepDarken)
                             local stepB = math.max(0, baseB - stepDarken)
                             
-                            -- Effet de brillance au dÃ©but
+                            -- Effet de brillance au début
                             local brightness = 1.0
                             if step < gradientSteps * 0.15 then
                                 brightness = 1.0 + (0.12 * (1.0 - step / (gradientSteps * 0.15)))
@@ -1905,12 +1901,12 @@ function Menu.DrawBackground()
         end
         
         -- Ne pas dessiner le fond avant la barre Main Menu
-        -- S'assurer que le segment commence au moins Ã  menuBarY
+        -- S'assurer que le segment commence au moins à menuBarY
         if seg.y < menuBarY then
-            -- Ajuster le segment pour commencer Ã  menuBarY
+            -- Ajuster le segment pour commencer à menuBarY
             local offset = menuBarY - seg.y
             if offset >= seg.h then
-                -- Segment complÃ¨tement au-dessus de la barre Main Menu, ignorer
+                -- Segment complètement au-dessus de la barre Main Menu, ignorer
                 -- Passer au segment suivant
             else
                 -- Ajuster le segment
@@ -1918,7 +1914,7 @@ function Menu.DrawBackground()
             end
         end
         
-        -- VÃ©rifier Ã  nouveau aprÃ¨s ajustement
+        -- Vérifier à nouveau après ajustement
         if seg.y < menuBarY or seg.h <= 0 then
             -- Ignorer ce segment
         else
@@ -1933,10 +1929,10 @@ function Menu.DrawBackground()
                 
                 -- Ne pas dessiner avant la barre Main Menu
                 if currentY < menuBarY then
-                    -- Ajuster pour commencer Ã  menuBarY
+                    -- Ajuster pour commencer à menuBarY
                     local adjust = menuBarY - currentY
                     if adjust >= drawH then
-                        -- Cette partie est complÃ¨tement avant menuBarY, ignorer
+                        -- Cette partie est complètement avant menuBarY, ignorer
                     else
                         currentY = menuBarY
                         drawH = drawH - adjust
@@ -1957,7 +1953,7 @@ function Menu.DrawBackground()
                     end
                 end
                 
-                -- VÃ©rifier si c'est la zone des tabs (menuBar) - doit rester noir opaque
+                -- Vérifier si c'est la zone des tabs (menuBar) - doit rester noir opaque
                 local isTabArea = false
                 if currentY >= menuBarY and currentY < menuBarEndY then
                     isTabArea = true
@@ -1970,7 +1966,7 @@ function Menu.DrawBackground()
                 if isTabArea then
                     backgroundAlpha = 1.0
                 else
-                    -- VÃ©rifier l'option "Black Background"
+                    -- Vérifier l'option "Black Background"
                     local blackBackgroundItem = nil
                     if Menu.Categories then
                         for _, cat in ipairs(Menu.Categories) do
