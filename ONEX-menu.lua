@@ -44,8 +44,8 @@ Menu.BindingKeyName = nil
 
 Menu.ShowKeybinds = false
 
-
 Menu.CurrentTopTab = 1
+
 function Menu.UpdateCategoriesFromTopTab()
     if not Menu.TopLevelTabs then return end
     local currentTop = Menu.TopLevelTabs[Menu.CurrentTopTab]
@@ -132,40 +132,12 @@ Menu.Colors = {
 Menu.CurrentTheme = "Purple"
 
 function Menu.ApplyTheme(themeName)
-    if not themeName or type(themeName) ~= "string" then
-        themeName = "Purple"
-    end
-    
-    -- Normaliser la casse pour la comparaison
-    local themeLower = string.lower(themeName)
-    Menu.CurrentTheme = themeName
-    
-    if themeLower == "red" then
-        Menu.Colors.HeaderPink = { r = 255, g = 0, b = 0 }
-        Menu.Colors.SelectedBg = { r = 255, g = 0, b = 0 }
-        Menu.Banner.imageUrl = "https://imgur.com/aMw0pcX"
-        Menu.CurrentTheme = "Red"
-    elseif themeLower == "purple" then
-        Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
-        Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
-        Menu.Banner.imageUrl = "https://imgur.com/aMw0pcXL"
-        Menu.CurrentTheme = "Purple"
-    elseif themeLower == "gray" then
-        Menu.Colors.HeaderPink = { r = 128, g = 128, b = 128 }
-        Menu.Colors.SelectedBg = { r = 128, g = 128, b = 128 }
-        Menu.Banner.imageUrl = "https://imgur.com/aMw0pcX"
-        Menu.CurrentTheme = "Gray"
-    elseif themeLower == "pink" then
-        Menu.Colors.HeaderPink = { r = 255, g = 20, b = 147 }
-        Menu.Colors.SelectedBg = { r = 255, g = 20, b = 147 }
-        Menu.Banner.imageUrl = "https://imgur.com/aMw0pcX"
-        Menu.CurrentTheme = "pink"
-    else
-        Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
-        Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
-        Menu.Banner.imageUrl = "https://imgur.com/aMw0pcX"
-        Menu.CurrentTheme = "Purple"
-    end
+    themeName = "Purple"
+
+    Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
+    Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
+    Menu.Banner.imageUrl = "https://i.imgur.com/aMw0pcX.png"
+    Menu.CurrentTheme = "Purple"
 
     if Menu.Banner.enabled and Menu.Banner.imageUrl then
         Menu.LoadBannerTexture(Menu.Banner.imageUrl)
@@ -188,6 +160,7 @@ Menu.Position = {
     scrollbarPadding = 3,
     headerRadius = 6
 }
+
 Menu.Scale = 1.0
 
 function Menu.GetScaledPosition()
