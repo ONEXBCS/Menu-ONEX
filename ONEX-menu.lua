@@ -1497,7 +1497,7 @@ function Menu.DrawFooter()
     local scaledFooterSize = footerSize * scale
     local footerTextY = footerY + (footerHeight / 2) - (scaledFooterSize / 2) + (1 * scale)
 
-    local footerText = ".gg/JAjYK5Aa "
+    local footerText = " 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗢𝗡𝗘𝗫 | 𝗱𝗶𝘀𝗰𝗼𝗿𝗱.𝗴𝗴/𝘁𝗺𝟮𝗔𝟯𝗛𝟴𝗤𝘃𝘂 "
     local currentX = x + footerPadding
 
     local textWidth = 0
