@@ -136,6 +136,7 @@ function Menu.ApplyTheme(themeName)
         themeName = "Purple"
     end
     
+    -- Normaliser la casse pour la comparaison
     local themeLower = string.lower(themeName)
     Menu.CurrentTheme = themeName
     
@@ -144,25 +145,21 @@ function Menu.ApplyTheme(themeName)
         Menu.Colors.SelectedBg = { r = 255, g = 0, b = 0 }
         Menu.Banner.imageUrl = "https://imgur.com/a/d78WzrM"
         Menu.CurrentTheme = "Red"
-
     elseif themeLower == "purple" then
         Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
         Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
         Menu.Banner.imageUrl = "https://imgur.com/a/d78WzrM"
         Menu.CurrentTheme = "Purple"
-
     elseif themeLower == "gray" then
         Menu.Colors.HeaderPink = { r = 128, g = 128, b = 128 }
         Menu.Colors.SelectedBg = { r = 128, g = 128, b = 128 }
         Menu.Banner.imageUrl = "https://imgur.com/a/d78WzrM"
         Menu.CurrentTheme = "Gray"
-
     elseif themeLower == "pink" then
         Menu.Colors.HeaderPink = { r = 255, g = 20, b = 147 }
         Menu.Colors.SelectedBg = { r = 255, g = 20, b = 147 }
         Menu.Banner.imageUrl = "https://imgur.com/a/d78WzrM"
-        Menu.CurrentTheme = "Pink"
-
+        Menu.CurrentTheme = "pink"
     else
         Menu.Colors.HeaderPink = { r = 148, g = 0, b = 211 }
         Menu.Colors.SelectedBg = { r = 148, g = 0, b = 211 }
@@ -174,8 +171,6 @@ function Menu.ApplyTheme(themeName)
         Menu.LoadBannerTexture(Menu.Banner.imageUrl)
     end
 end
-
-Menu.ApplyTheme("Purple")
 
 Menu.Position = {
     x = 50,
